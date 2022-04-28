@@ -1,0 +1,10 @@
+[
+    {
+        "name":"MackBook Pro 2020",
+        "img":"macbook-pro-500x500.jpg",
+        "description":"Best quality laptop ever build",
+        "price":130000,
+        "quantity":100,
+        "email":""
+    }
+]
