@@ -7,6 +7,9 @@ import { faRupee } from '@fortawesome/free-solid-svg-icons'
 const Inventory = () => {
     const {productId}=useParams()
     const [product,setProduct]=useState({})
+    const [agree,setAgree]=useState(false)
+    
+    //get product by id
     useEffect(()=>{
         axios.get(`http://localhost:8000/product/${productId}`)
               .then((res)=>{
@@ -15,13 +18,28 @@ const Inventory = () => {
               })
              
     },[productId])
+
+    //delevery product
     const handleDelivery=()=>{
-        product.quantity=parseInt(product.quantity)-1
+        product.quantity=parseInt(product.quantity)>0?parseInt(product.quantity)-1:parseInt(product.quantity)
         setProduct({...product})
         axios.put(`http://localhost:8000/updateQuantity/${product._id}`,product)
              .then((res)=>{
                  if(res.data){
                      console.log(res.data)
+                 }
+             })
+    }
+    //reStock product
+    const [reStock,setReStock]=useState(0)
+    const hangleReStock=(e)=>{
+        e.preventDefault()
+        product.quantity=parseInt(product.quantity)+parseInt(reStock)
+        setProduct({...product})
+        axios.put(`http://localhost:8000/updateQuantity/${product._id}`,product)
+             .then((res)=>{
+                 if(res.data){
+                     setReStock(0)
                  }
              })
 
@@ -40,12 +58,23 @@ const Inventory = () => {
                     <p><span className='font-bold'>Quantity:</span> {product?.quantity}</p>
                     <p><span className='font-bold'>Supplier:</span> {product?.supplier}</p>
                 </div>
-                <div className='text-center'>
-                    <button className='w-1/2 bg-gray-300 p-2 rounded-lg font-bold' onClick={handleDelivery}>Deliveried</button>
+                <div className='text-center my-3'>
+                    { 
+                       agree?(
+                           <form action="" onSubmit={hangleReStock}>
+                               <input type="text" placeholder='Restock Quantity' className='border-b-2 outline-none w-1/2 px-3 rounded my-2'value={reStock} onChange={(e)=>setReStock(e.target.value)} /><br />
+                               <input type="submit" value="ReStock" className='w-1/2 bg-gray-300 p-2 rounded-lg font-bold cursor-pointer'/>
+                           </form>
+                            ):(
+                                <button className='w-1/2 bg-gray-300 p-2 rounded-lg font-bold' onClick={handleDelivery}>Deliveried</button>
+                            )
+                    }
+                    
                 </div>
-
+                <div className='text-center'>
+                    <button className='w-1/2 bg-gray-300 p-2 rounded-lg font-bold' onClick={()=>setAgree(!agree)}>{agree?"Deliveried":"ReStock"}</button>
+                </div>
             </div>
-           
         </div>
     );
 };
