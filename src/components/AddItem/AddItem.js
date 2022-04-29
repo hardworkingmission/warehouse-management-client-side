@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddItem = () => {
+    const navigate=useNavigate()
     const [state,setState]=useState({name:'',description:'',price:'',quantity:''})
     const [imgFile,setImgFile]=useState()
     const handleChange=(e)=>{
@@ -20,7 +22,9 @@ const AddItem = () => {
         }
         axios.post('http://localhost:8000/addProduct',newItem)
            .then((res)=>{
-               console.log(res.data)
+               if(res.data.insertedId){
+                navigate('/manageitems/allitems')
+               }
            })
         //console.log(newItem)
     }
