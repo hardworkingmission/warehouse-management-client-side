@@ -5,6 +5,9 @@ import Footer from './components/Footer/Footer'
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
 import Inventory from './components/Inventory/Inventory';
+import ManageItems from './components/ManageItems/ManageItems';
+import AllItems from './components/AllItems/AllItems';
+import AddItem from './components/AddItem/AddItem';
 
 function App() {
   return (
@@ -13,6 +16,11 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='*' element={<NotFound/>}/>
+        <Route path='/manageitems' element={<ManageItems/>}>
+           <Route index element={<AllItems/>}/>
+           <Route path="allitems" element={<AllItems/>}/>
+           <Route path='additem' element={<AddItem/>}/>
+        </Route>
         <Route path='/inventory/'>
           <Route path=':productId' element={<Inventory/>}/>
         </Route>

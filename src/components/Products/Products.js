@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import useProducts from '../../hooks/useProducts/useProducts';
 import Product from '../Product/Product'
 
 const Products = () => {
     const [products,setProducts]=useProducts()
+    const navigate=useNavigate()
 
     const shuffledProducts = products.sort(() => 0.5 - Math.random());
     let selectedProducts=shuffledProducts.slice(0,6)
@@ -17,6 +19,11 @@ const Products = () => {
 
                 }
             </div>
+            <div className='text-center'>
+                <button className='text-xl font-bold my-3 bg-white p-2 rounded' onClick={()=>navigate('/manageitems')}>Manage Inventories</button>
+
+            </div>
+           
         </div>
     );
 };

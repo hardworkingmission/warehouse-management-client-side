@@ -52,17 +52,17 @@ const Header = () => {
                             <img src={logo} alt="" className='h-[80px]'/>
                         </Link>
                         {/* <!-- Left links --> */}
-                        <ul className="navbar-nav flex flex-col justify-between pl-0 list-style-none mx-auto text-pink-600">
+                        <ul className="navbar-nav flex flex-col justify-center pl-0 list-style-none mx-auto text-pink-600">
                             <li className="nav-item px-2  my-3 md:m-0">
-                                <CustomLink className="nav-link active" to={'/about'}>
-                                    About
+                                <CustomLink className="nav-link active" to={'/manageitems'}>
+                                    Manage items
                                 </CustomLink>
                             </li>
                             <li className="nav-item px-2 mb-3 md:m-0">
-                                <CustomLink className="nav-link active" aria-current="page" to={'/blogs'}>Blogs</CustomLink>
+                                <CustomLink className="nav-link active" aria-current="page" to={'/additem'}>Add Item</CustomLink>
                             </li>
                             <li className="nav-item px-2 mb-3 md:m-0">
-                                <CustomLink className="nav-link active" aria-current="page" to={'/contact'}>Contact</CustomLink>
+                                <CustomLink className="nav-link active" aria-current="page" to={'/myitems'}>My Items</CustomLink>
                             </li>
                         
                         </ul>
@@ -71,7 +71,7 @@ const Header = () => {
                         <ul className="navbar-nav flex flex-col pl-0 list-style-none ml-auto text-pink-600">
 
                             <li className="nav-item px-2 mb-3 md:m-0">
-                                <CustomLink className="nav-link active" aria-current="page" to={'/contact'}>Contact</CustomLink>
+                                <CustomLink className="nav-link active" aria-current="page" to={'/blogs'}>Blogs</CustomLink>
                             </li>
                             <li className="nav-item px-2  mb-3 md:m-0 flex items-center"> 
                                     {

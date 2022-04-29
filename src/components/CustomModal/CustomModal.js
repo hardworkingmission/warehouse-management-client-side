@@ -23,7 +23,7 @@ const customStyles = {
       },
   };
 Modal.setAppElement(document.getElementById('root'))
-const CustomModal = ({closeModal,modalIsOpen}) => {
+const CustomModal = ({closeModal,modalIsOpen,children}) => {
     return (
         <Modal
         isOpen={modalIsOpen}
@@ -32,7 +32,7 @@ const CustomModal = ({closeModal,modalIsOpen}) => {
         >
             <div className='h-[200px] w-[300px] relvative flex items-center justify-center'>
                 <FontAwesomeIcon role={'button'} onClick={()=>closeModal()} icon={faClose} className='absolute top-[2%] right-[2%] h-[20px] w-[20px] text-red-600'/>
-                <h1 className='text-xl text-pink-600 font-bold'>Thank you for the booking.</h1>
+                {children}
             </div>
         </Modal>
     );
