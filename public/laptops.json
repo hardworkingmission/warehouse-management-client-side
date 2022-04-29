@@ -2,9 +2,92 @@
     {
         "name":"MackBook Pro 2020",
         "img":"macbook-pro-500x500.jpg",
-        "description":"Best quality laptop ever build",
+        "description":"Apple M1 Pro Chip (10-core CPU, 16-core GPU, 200GB/s), 16GB RAM, 1TB SSD",
         "price":130000,
-        "quantity":100,
-        "email":""
+        "quantity":100
+    },
+    {
+        "name":"Dell 14-3405",
+        "img":"dell-14-3405-5-500x500.jpg",
+        "description":"Intel Core i5-1135G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 8GB LPDDR4x RAM, 512GB SSD",
+        "price":830000,
+        "quantity":50
+    },
+    {
+        "name":"Galaxy Book Pro",
+        "img":"galaxy-book-pro-002-500x500.jpg",
+        "description":"Intel Core i7-1165G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 16GB LPDDR4x RAM, 512GB SSD",
+        "price":90000,
+        "quantity":30
+    },
+    {
+        "name":"HP Victus 16",
+        "img":"hp-victus-16-e0347ax-01-500x500.jpg",
+        "description":"Intel Core i7-1165G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 16GB LPDDR4x RAM, 2TB SSD",
+        "price":150000,
+        "quantity":120
+    },
+    {
+        "name":"Lenovo Slim 3i",
+        "img":"lenovo-slim-3i-001-500x500.jpg",
+        "description":"Intel Core i5-1155G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 8GB LPDDR4x RAM, 512GB SSD",
+        "price":70000,
+        "quantity":60
+    },
+    {
+        "name":"Matebook d-15",
+        "img":"matebook-d-15-02-500x500.jpg",
+        "description":"Intel Core i7-1165G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 16GB LPDDR4x RAM, 1TB SSD",
+        "price":105000,
+        "quantity":90
+    },
+    {
+        "name":"Modern 14 B11MO",
+        "img":"modern-14-b11mo-010-500x500.jpg",
+        "description":"Intel Core i3-1115G4 Processor (6M Cache, 3.00 GHz up to 4.10 GHz), 8GB DDR4 3200MHz RAM,512GB NVMe PCIe Gen3x4 SSD",
+        "price":75000,
+        "quantity":150
+    },
+    {
+        "name":"Realme Book Pro",
+        "img":"realme-book-500x500.jpg",
+        "description":"Intel Core i7-1165G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 16GB LPDDR4x RAM, 512GB SSD",
+        "price":89000,
+        "quantity":20
+    },
+    {
+        "name":"Redmi book 14",
+        "img":"redmi-book-14-00001-500x500.jpg",
+        "description":"Intel Core i7-1165G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 16GB LPDDR4x RAM, 512GB SSD",
+        "price":85000,
+        "quantity":10
+    },
+    {
+        "name":"Rezer Book 13",
+        "img":"rezer-book-13-500x500.jpg",
+        "description":"Intel Core i7-1165G7 Processor (12MB Cache, 2.80GHz up to 4.70GHz),16GB Dual-Channel RAM, 512GB PCIe SSD",
+        "price":250000,
+        "quantity":5
+    },
+    {
+        "name":"Surface Go",
+        "img":"surface-laptop-go-500x500.jpg",
+        "description":"Intel Core i5-1035G1 Processor (6M Cache, 1.00 GHz up to 3.60 GHz), 8GB LPDDR4x RAM, 256GB SSD",
+        "price":270000,
+        "quantity":19
+    },
+    {
+        "name":"Swift 3xl",
+        "img":"swift-sf314-43-01-500x500.jpg",
+        "description":"Intel Core i7-1165G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 16GB LPDDR4x RAM, 512GB SSD",
+        "price":90000,
+        "quantity":52
+    },
+    {
+        "name":"Vivobook 15",
+        "img":"vivobook-15-x515ea-003-500x500.jpg",
+        "description":"Intel Core i5-1135G7 Processor (12M Cache, 2.80 GHz up to 4.70 GHz), 8GB LPDDR4x RAM, 512GB SSD",
+        "price":78000,
+        "quantity":15
     }
 ]
