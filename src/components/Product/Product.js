@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Product = ({product}) => {
-    const {name,img,description,price,quantity,_id}=product
+    const {name,img,description,price,quantity,_id,supplier}=product
     const navigate=useNavigate()
     return (
         <div className='col border border-2 bg-white rounded-lg'>
@@ -17,6 +17,8 @@ const Product = ({product}) => {
                 <p><span className='font-bold mr-1'>Specification:</span>  {description}</p>
                 <p><span className='font-bold'>Price:</span> <FontAwesomeIcon icon={faRupee}/> {price}</p>
                 <p><span className='font-bold'>Quantity:</span> {quantity}</p>
+                <p><span className='font-bold'>Supplier:</span> {supplier}</p>
+
             </div>
              <div className='text-center'>
                 <button className='w-1/2 bg-gray-300 p-2 rounded-lg font-bold' onClick={()=>navigate(`/inventory/${_id}`)}>Update</button>
