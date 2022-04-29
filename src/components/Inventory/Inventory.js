@@ -16,7 +16,7 @@ const Inventory = () => {
              
     },[productId])
     const handleDelivery=()=>{
-        product.quantity-=1
+        product.quantity=parseInt(product.quantity)-1
         setProduct({...product})
         axios.put(`http://localhost:8000/updateQuantity/${product._id}`,product)
              .then((res)=>{
