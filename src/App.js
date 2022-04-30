@@ -30,7 +30,11 @@ function App() {
            <Route path="allitems" element={<AllItems/>}/>
            <Route path='additem' element={<AddItem/>}/>
         </Route>
-        <Route path='/myitems' element={<MyItems/>}/>
+        <Route path='/myitems' element={
+          <RequireAuth>
+            <MyItems/>
+          </RequireAuth> 
+        }/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<LogIn/>}/>
         <Route path='/blogs' element={<Blogs/>}/>

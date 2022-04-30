@@ -29,7 +29,7 @@ const AddItem = () => {
                 navigate('/manageitems/allitems')
                }
            })
-        //console.log(newItem)
+        console.log(newItem)
     }
     return (
         <div className='flex justify-center'>
