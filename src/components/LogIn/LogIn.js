@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 
@@ -14,15 +14,20 @@ const LogIn = () => {
         loginError,
       ] = useSignInWithEmailAndPassword(auth);
     const [error,setError]=useState('')
+
+    //redirect
+    const location =useLocation()
+    let from = location.state?.from?.pathname || "/";
     useEffect(()=>{
         if(loginError){
             setError(loginError.message)
             return;
         }
         if(user){
-            navigate('/')       
+            console.log(user)
+            navigate(from,{replace:true})       
         }
-    },[loginError,user,navigate])
+    },[loginError,user,navigate,from])
     const initialize={
         email:'',
         password:''
@@ -37,6 +42,7 @@ const LogIn = () => {
 
 
     }
+
     return (
         <div className='w-5/6 mx-auto flex justify-center my-3'>
             <div className='lg:w-[40%] md:w-[50%] w-[80%] p-2 border-2 rounded'>
