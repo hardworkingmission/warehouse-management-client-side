@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const LogIn = () => {
+    const [agree,setAgree]=useState(false)
+    const [state,setState]=useState({email:'',password:''})
+    const initialize={
+        email:'',
+        password:''
+    }
+    const handleChange=(e)=>{
+        setState({...state,[e.target.name]:e.target.value})
+    }
+    const userLogIn=(e)=>{
+        e.preventDefault()
+
+    }
     return (
         <div className='w-5/6 mx-auto flex justify-center my-3'>
             <div className='lg:w-[40%] md:w-[50%] w-[80%] p-2 border-2 rounded'>
@@ -14,8 +27,8 @@ const LogIn = () => {
                     <input type="text" name='password' className='border-b-2 mb-2 p-2 w-full outline-none bg-gray-100 rounded'/><br />
                     <div className='md:flex justify-between'>
                         <div>
-                            <input type="checkbox" name="agree" id="agree" />
-                            <label className='ml-2' htmlFor="agree">Remember Me</label>
+                            <input type="checkbox" name="agree" id="agree" onChange={(e)=>setAgree(e.target.checked)} className={`ml-2 ${agree?"accent-green-600":''}`}/>
+                            <label className={`ml-2 ${agree?"text-green-600":''}`} htmlFor="agree">Remember Me</label>
                         </div>
                         <p className='underline'>I forget my password</p>
                     </div>

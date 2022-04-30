@@ -1,21 +1,53 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init'
+import {verifyPassword} from '../../utilites/passwordVerification'
+
+import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth'
 
 const SignUp = () => {
     const [state,setState]=useState({name:'',email:'',password:'',confirmPassword:''})
+    const [agree,setAgree]=useState(false)
+    const [errors,setErrors]=useState([])
+    const navigate=useNavigate()
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        authError,
+      ] = useCreateUserWithEmailAndPassword(auth,{sendEmailVerification:true});
+
+    useEffect(()=>{
+        if(authError){
+            setErrors(authError)
+            return;
+            }
+            if(user){
+                navigate('/login')
+            }
+
+    },[authError,user,navigate])
+    
     const initialize={
         name:'',
         email:'',
         password:'',
         confirmPassword:''
     }
-    const [agree,setAgree]=useState(false)
     const handleChange=(e)=>{
         setState({...state,[e.target.name]:e.target.value})
     }
+    const {name,email,password,confirmPassword}=state
     const createUserWithEmailPassword=(e)=>{
            e.preventDefault()
-           console.log(state,agree)
+           const findErrors=verifyPassword(password,confirmPassword)
+           if(findErrors.length>0){
+               setErrors(findErrors)
+               return;
+           }
+           //setErrors([])
+           console.log(email,password)
+           createUserWithEmailAndPassword(email,password)
     }
     return (
         <div className='w-5/6 mx-auto flex justify-center my-3'>
@@ -41,7 +73,13 @@ const SignUp = () => {
                             <label className={`ml-2 ${agree?"text-green-600":''}`} htmlFor="agree">Remember Me</label>
                         </div>
                     </div>
-                    <p className='text-center my-2 text-red-600'>Error</p>
+                    <div>
+                        {
+                            errors.map(error=>(
+                                <p className='text-center my-2 text-red-600'>{error}</p>
+                            ))
+                        }
+                    </div>
                     <input type="submit" value="Sign Up" className='p-2 bg-gray-300 w-full rounded-lg font-bold cursor-pointer' disabled={agree?false:true}/>
                 </form>
                 <div  className='md:flex my-1'>
