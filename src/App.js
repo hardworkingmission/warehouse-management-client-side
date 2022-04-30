@@ -8,6 +8,9 @@ import Inventory from './components/Inventory/Inventory';
 import ManageItems from './components/ManageItems/ManageItems';
 import AllItems from './components/AllItems/AllItems';
 import AddItem from './components/AddItem/AddItem';
+import SignUp from './components/SignUp/SignUp';
+import LogIn from './components/LogIn/LogIn';
+import Blogs from './components/Blogs/Blogs';
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
            <Route path="allitems" element={<AllItems/>}/>
            <Route path='additem' element={<AddItem/>}/>
         </Route>
+        <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/login' element={<LogIn/>}/>
+        <Route path='/blogs' element={<Blogs/>}/>
         <Route path='/inventory/'>
           <Route path=':productId' element={<Inventory/>}/>
         </Route>
