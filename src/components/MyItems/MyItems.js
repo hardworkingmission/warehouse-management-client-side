@@ -2,9 +2,16 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { confirm } from "react-confirm-box";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
+const options = {
+    labels: {
+      confirmable: "Confirm",
+      cancellable: "Cancel"
+    },
+  }
 const MyItems = () => {
     const [user,loading,error]=useAuthState(auth)
     const [myItems,setMyItems]=useState([])
@@ -15,8 +22,22 @@ const MyItems = () => {
                   setMyItems(res.data)
               })
     },[email])
-    const deleteItem=(id)=>{
+    const deleteItem=async(id)=>{
         console.log(id)
+        const result = await confirm("Do you want to delete it?",options);
+        if(result){
+           //setModalIsOpen(false)
+           axios.delete(`http://localhost:8000/deleteProduct/${id}`)
+           .then(res=>{
+               if(res.data.deletedCount===1){
+                   const restItems=myItems?.filter(myitem=>myitem._id!==id)
+                   setMyItems(restItems)
+               }
+           }).catch((err)=>{
+               console.log(err)
+           })
+        }
+
 
     }
     return (
