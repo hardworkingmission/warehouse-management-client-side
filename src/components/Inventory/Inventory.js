@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRupee } from '@fortawesome/free-solid-svg-icons'
 
@@ -46,8 +46,10 @@ const Inventory = () => {
     }
 
     return (
-        <div className='w-5/6 mx-auto flex justify-center my-3'>
+        <div className='w-5/6 mx-auto flex justify-center my-3 relative'>
+            
             <div className='lg:w-1/3 md:w-2/4 w-full border border-2 p-3 bg-white rounded-lg '>
+            <Link to={'/manageitems'} className='adsolute text-blue-600 underline w-[200px]'>Manage Inventories</Link>
                 <div className="product-img">
                     <img src={process.env.PUBLIC_URL+`/images/${product.img}`} alt=""  className='h-[300px]'/>
                 </div>
