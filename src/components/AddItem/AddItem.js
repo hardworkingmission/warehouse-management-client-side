@@ -42,7 +42,8 @@ const AddItem = () => {
                 <input type="text" className="p-2 mb-2 border-b-2 w-full outline-none rounded"name="price" placeholder='Price' required onChange={handleChange} value={state?.price}/><br/>
                 <input type="text" className="p-2 mb-2 border-b-2 w-full outline-none rounded"name='quantity' placeholder='Quantity' required onChange={handleChange} value={state?.quantity}/><br />
                 <input type="text" className="p-2 mb-2 border-b-2 w-full outline-none rounded"name='supplier' placeholder='Supplier' required onChange={handleChange} value={state?.supplier}/><br />
-                <input type="file" className="p-2 mb-2 border-b-2 w-full outline-none rounded"name="img" required onChange={handleFileChange}/><br />
+                <label htmlFor="img" className=''>Image</label>
+                <input type="file" className="p-2 mb-2 border-b-2 w-full outline-none rounded " name="img" required onChange={handleFileChange} id='img'/><br />
                 <input type="submit" className='bg-gray-300 w-full p-2 rounded' value="Add" />
             </form>
             

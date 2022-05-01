@@ -52,20 +52,23 @@ const Header = () => {
                             <img src={logo} alt="" className='h-[80px]'/>
                         </Link>
                         {/* <!-- Left links --> */}
-                        <ul className="navbar-nav flex flex-col justify-center pl-0 list-style-none mx-auto text-pink-600">
-                            <li className="nav-item px-2  my-3 md:m-0">
-                                <CustomLink className="nav-link active" to={'/manageitems'}>
-                                    Manage items
-                                </CustomLink>
-                            </li>
-                            <li className="nav-item px-2 mb-3 md:m-0">
-                                <CustomLink className="nav-link active" aria-current="page" to={'/additem'}>Add Item</CustomLink>
-                            </li>
-                            <li className="nav-item px-2 mb-3 md:m-0">
-                                <CustomLink className="nav-link active" aria-current="page" to={'/myitems'}>My Items</CustomLink>
-                            </li>
-                        
-                        </ul>
+                        {
+                            user?.uid&&(
+                            <ul className="navbar-nav flex flex-col justify-center pl-0 list-style-none mx-auto text-pink-600">
+                                <li className="nav-item px-2  my-3 md:m-0">
+                                    <CustomLink className="nav-link active" to={'/manageitems'}>
+                                        Manage items
+                                    </CustomLink>
+                                </li>
+                                <li className="nav-item px-2 mb-3 md:m-0">
+                                    <CustomLink className="nav-link active" aria-current="page" to={'/manageitems/additem'}>Add Item</CustomLink>
+                                </li>
+                                <li className="nav-item px-2 mb-3 md:m-0">
+                                    <CustomLink className="nav-link active" aria-current="page" to={'/myitems'}>My Items</CustomLink>
+                                </li>
+                            </ul>
+                            )
+                        }
                         {/* <!-- Left links --> */}
                         {/* Right links */}
                         <ul className="navbar-nav flex flex-col pl-0 list-style-none ml-auto text-pink-600">
