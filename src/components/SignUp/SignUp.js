@@ -4,6 +4,7 @@ import auth from '../../firebase.init'
 import {verifyPassword} from '../../utilites/passwordVerification'
 
 import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth'
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
     const [state,setState]=useState({name:'',email:'',password:'',confirmPassword:''})
@@ -90,6 +91,9 @@ const SignUp = () => {
                     <div className='h-[2px] w-full bg-gray-300'></div>
                     <p className='mx-2'>or</p>
                     <div className='h-[2px] w-full bg-gray-300'></div>
+                </div>
+                <div className="scoial-login">
+                    <SocialLogin/>
                 </div>
             </div>
         </div>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth'
+import {useSendPasswordResetEmail, useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LogIn = () => {
     const [agree,setAgree]=useState(false)
@@ -13,6 +16,9 @@ const LogIn = () => {
         loading,
         loginError,
       ] = useSignInWithEmailAndPassword(auth);
+      const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(
+        auth
+      );
     const [error,setError]=useState('')
 
     //redirect
@@ -42,6 +48,16 @@ const LogIn = () => {
 
 
     }
+    const handleResetPassword=async()=>{
+        if(email){
+            await sendPasswordResetEmail(email)
+            toast('Reset password email sent')
+
+        }
+        
+
+
+    }
 
     return (
         <div className='w-5/6 mx-auto flex justify-center my-3'>
@@ -58,7 +74,7 @@ const LogIn = () => {
                             <input type="checkbox" name="agree" id="agree" onChange={(e)=>setAgree(e.target.checked)} className={`ml-2 ${agree?"accent-green-600":''}`}/>
                             <label className={`ml-2 ${agree?"text-green-600":''}`} htmlFor="agree">Remember Me</label>
                         </div>
-                        <p className='underline'>I forget my password</p>
+                        <p className='underline text-blue-600 cursor-pointer' onClick={handleResetPassword}>I forget my password</p>
                     </div>
                     <p className='text-center my-2 text-red-600'>{error&&error}</p>
                     <input type="submit" value="Log In" className='p-2 bg-gray-300 w-full rounded-lg font-bold cursor-pointer'/>
@@ -72,6 +88,10 @@ const LogIn = () => {
                     <p className='mx-2'>or</p>
                     <div className='h-[2px] w-full bg-gray-300'></div>
                 </div>
+                <div className="scoial-login">
+                    <SocialLogin/>
+                </div>
+                <ToastContainer/>
             </div>
         </div>
     );
