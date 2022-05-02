@@ -17,10 +17,13 @@ const MyItems = () => {
     const [myItems,setMyItems]=useState([])
     const email=user?.email
     useEffect(()=>{
-        axios.get(`http://localhost:8000/myItems?email=${email}`)
-              .then((res)=>{
-                  setMyItems(res.data)
-              })
+        axios.get(`http://localhost:8000/myItems?email=${email}`,{
+            headers:{
+                authorization:`Bearer ${localStorage.getItem('accessToken')}`
+            }
+        }).then((res)=>{
+                setMyItems(res.data)
+            })
     },[email])
     const deleteItem=async(id)=>{
         console.log(id)
