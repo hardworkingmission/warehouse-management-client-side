@@ -6,6 +6,7 @@ import {verifyPassword} from '../../utilites/passwordVerification'
 import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth'
 import SocialLogin from '../SocialLogin/SocialLogin';
 import CustomSpinner from '../CustomSpinner/CustomSpinner';
+import Helmet from 'react-helmet';
 
 const SignUp = () => {
     const [state,setState]=useState({name:'',email:'',password:'',confirmPassword:''})
@@ -56,6 +57,9 @@ const SignUp = () => {
     }
     return (
         <div className='w-5/6 mx-auto flex justify-center my-3'>
+            <Helmet>
+                <title>Signup</title>
+            </Helmet>
             <div className='lg:w-[40%] md:w-[50%] w-[80%] p-2 border-2 rounded'>
                 <h1 className='md:text-3xl font-bold text-center my-2'>Signup for account</h1>
                 <form action="" className='' onSubmit={createUserWithEmailPassword}>

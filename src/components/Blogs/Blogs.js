@@ -1,8 +1,12 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 const Blogs = () => {
     return (
         <div className='w-5/6 mx-auto'>
+            <Helmet>
+                <title>Blogs</title>
+            </Helmet>
             <div className='p-2 my-2'>
                 <div className="question">
                   <h1 className='font-bold lg:text-xl md:text-lg'>Q1.Difference between `javascript` and `nodejs`.</h1>

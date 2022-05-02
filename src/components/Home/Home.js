@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import Chart from '../Chart/Chart';
 import CustomCarousel from '../CustomCarousel/CustomCarousel';
 import Products from '../Products/Products';
@@ -6,6 +7,9 @@ import Products from '../Products/Products';
 const Home = () => {
     return (
         <div className='w-5/6 mx-auto'>
+            <Helmet>
+                <title>Home</title>
+            </Helmet>
             <div className="carousel">
                 <CustomCarousel/>
             </div>

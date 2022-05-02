@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Helmet from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
@@ -33,6 +34,9 @@ const AddItem = () => {
     }
     return (
         <div className='flex justify-center'>
+            <Helmet>
+                <title>AddItem</title>
+            </Helmet>
             
             <form action="" className='lg:w-[50%] md:w-[70%] border border-2 p-2 rounded' onSubmit={createNewItem}>
                <h1 className='text-center text-2xl my-2 font-bold'>Please Add A Product</h1>

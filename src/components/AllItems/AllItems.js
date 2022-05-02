@@ -4,6 +4,7 @@ import { faTrash,faEdit} from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import { confirm } from "react-confirm-box";
 import { useNavigate } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 const options = {
     labels: {
@@ -15,11 +16,23 @@ const options = {
 const AllItems = () => {
     const navigate=useNavigate()
     const [products,setProducts]=useState([])
+    const [pages,setPages]=useState(0)
+    const [page,setPage]=useState(0)
+    const [size,setSize]=useState(10)
     useEffect(()=>{
-        axios.get('http://localhost:8000/products')
+        axios.get(`http://localhost:8000/products?page=${page}&size=${size}`)
              .then(res=>{
                 setProducts(res.data)
              })
+        
+
+    },[page,size])
+    useEffect(()=>{
+        axios.get('http://localhost:8000/itemCount')
+        .then(res=>{
+            const count=parseInt(res.data.itemCount)
+            setPages(Math.ceil(count/10))
+        })
 
     },[])
 
@@ -45,6 +58,9 @@ const AllItems = () => {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>AllItems</title>
+            </Helmet>
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="overflow-hidden">
@@ -93,6 +109,20 @@ const AllItems = () => {
                         </table>
                     </div>
                 </div>
+            </div>
+            <div className='text-center'>
+                {
+                    [...Array(pages).keys()].map(num=>(
+                        <button className={`border border-2 mr-2 py-1 px-2 ${num===page?'bg-gray-300':''}`} onClick={()=>setPage(num)}>{num}</button>
+                    ))
+
+                }
+                {
+                    <select name="" id="" className='border border-2 py-1' onClick={(e)=>setSize(e.target.value)}>
+                        <option value="5">5</option>
+                        <option selected value="10">10</option>
+                    </select>
+                }
             </div>
         </div>
     );

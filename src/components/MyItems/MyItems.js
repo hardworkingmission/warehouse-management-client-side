@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { confirm } from "react-confirm-box";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import {Helmet} from "react-helmet";
 
 const options = {
     labels: {
@@ -47,6 +48,9 @@ const MyItems = () => {
     }
     return (
         <div className="w-5/6 mx-auto">
+            <Helmet>
+                <title>MyItems</title>
+            </Helmet>
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="overflow-hidden">

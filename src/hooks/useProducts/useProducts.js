@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const useProducts = () => {
-    const [products,setProducts]=useState(null)
+    const [products,setProducts]=useState([])
     const [loading,setLoading]=useState(true)
     useEffect(()=>{
         axios.get('http://localhost:8000/products')

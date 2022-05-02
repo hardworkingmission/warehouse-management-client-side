@@ -1,6 +1,7 @@
 import { faPlus} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import Helmet from 'react-helmet';
 import { Outlet, useNavigate } from 'react-router-dom';
 import CustomLink from '../CustomLink/CustomLink';
 
@@ -9,6 +10,9 @@ const ManageItems = () => {
     const navigate=useNavigate()
     return (
         <div className='w-5/6 mx-auto md:flex'>
+            <Helmet>
+                <title>ManageItems</title>
+            </Helmet>
             <div className="lg:w-3/12 md:w-4/12 w-full">
                 <nav className='w-full p-2'>
                     <ul>

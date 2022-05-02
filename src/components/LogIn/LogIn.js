@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import CustomSpinner from '../CustomSpinner/CustomSpinner';
 import axios from 'axios';
 import { async } from '@firebase/util';
+import Helmet from 'react-helmet';
 
 const LogIn = () => {
     const [agree,setAgree]=useState(false)
@@ -63,15 +64,14 @@ const LogIn = () => {
         if(email){
             await sendPasswordResetEmail(email)
             toast('Reset password email sent')
-
         }
-        
-
-
     }
 
     return (
         <div className='w-5/6 mx-auto flex justify-center my-3'>
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
             <div className='lg:w-[40%] md:w-[50%] w-[80%] p-2 border-2 rounded'>
                 <h1 className='md:text-3xl font-bold text-center my-2'>Login to your account</h1>
                 <form action="" className='' onSubmit={userLogIn}>
