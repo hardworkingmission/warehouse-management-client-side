@@ -78,7 +78,7 @@ const Blogs = () => {
                 </div>
                 <div className="answer">
                     <h3 className='underline font-bold'>Reasons of using Nodejs:</h3>
-                    <p>Javascript is a lightweight fast interpreted programming language.It runs on Nodejs.Nodejs is single-threaded event-driven system,it is fast when handling lots of requests compared to multi-threaded system.It has large number of pre-build modules and develper community which helps a developer to buid a application easy and fast.It is good for I/O intensive task.</p>
+                    <p>Javascript is a lightweight fast interpreted programming language.It runs on Nodejs in server.Nodejs is single-threaded event-driven system,it is fast when handling lots of requests compared to multi-threaded system.It has large number of pre-build modules and develper community which helps a developer to buid a application easy and fast.It is good for I/O intensive task.</p>
                     <h3 className='underline font-bold'>Reasons of using Mongodb:</h3>
                     <p>MongoDB is a document based,NoSQL database management system.In mongodb data are stored JSON-like object format.The data objects are stored as separate documents inside a collection.The motivation of the MongoDB language is to implement a data store that provides high performance, high availability, and automatic scaling.Some reasons are given bellow for choosing mondodab- </p>
                     <ul className='mt-2 ml-2' style={{listStyle:'disc'}}>
