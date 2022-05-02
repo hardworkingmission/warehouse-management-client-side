@@ -6,6 +6,8 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CustomSpinner from '../CustomSpinner/CustomSpinner';
+import axios from 'axios';
+import { async } from '@firebase/util';
 
 const LogIn = () => {
     const [agree,setAgree]=useState(false)
@@ -26,15 +28,11 @@ const LogIn = () => {
     const location =useLocation()
     let from = location.state?.from?.pathname || "/";
     useEffect(()=>{
-        if(loading){
-            return <CustomSpinner/>
-        }
         if(loginError){
             setError(loginError.message)
             return;
         }
         if(user){
-            console.log(user)
             navigate(from,{replace:true})       
         }
     },[loginError,user,navigate,from])
@@ -46,9 +44,14 @@ const LogIn = () => {
         setState({...state,[e.target.name]:e.target.value})
     }
     const {email,password}=state
-    const userLogIn=(e)=>{
+    const userLogIn=async(e)=>{
         e.preventDefault()
-        signInWithEmailAndPassword(email,password)
+        await signInWithEmailAndPassword(email,password)
+        axios.post('http://localhost:8000/generateJWT',{email})
+            .then((res)=>{
+                localStorage.setItem('accessToken',res.data)
+                console.log(res.data)
+            })
 
 
     }

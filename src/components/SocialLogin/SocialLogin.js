@@ -4,6 +4,7 @@ import auth from '../../firebase.init';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CustomSpinner from '../CustomSpinner/CustomSpinner'
+import axios from 'axios';
 
 const SocialLogin = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
@@ -17,12 +18,20 @@ const SocialLogin = () => {
             return;
         }
         if(googleUser){
-            console.log(googleUser)
+            const email=googleUser.user.email
+            axios.post('http://localhost:8000/generateJWT',{email})
+            .then((res)=>{
+                localStorage.setItem('accessToken',res.data)
+                console.log(res.data)
+            })
             navigate(from,{replace:true})       
         }
+        
     },[googleError,from,navigate,googleUser])
-    const handleLoginWithGoogle=()=>{
+    const handleLoginWithGoogle=async ()=>{
         signInWithGoogle()
+        //console.log(googleUser)
+
 
     }
     
