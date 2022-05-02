@@ -30,6 +30,11 @@ function App() {
            <Route path="allitems" element={<AllItems/>}/>
            <Route path='additem' element={<AddItem/>}/>
         </Route>
+        <Route path='/additem' element={
+          <RequireAuth>
+            <AddItem/>
+          </RequireAuth>
+        }/>
         <Route path='/myitems' element={
           <RequireAuth>
             <MyItems/>

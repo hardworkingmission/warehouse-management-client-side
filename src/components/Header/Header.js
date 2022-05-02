@@ -61,7 +61,7 @@ const Header = () => {
                                     </CustomLink>
                                 </li>
                                 <li className="nav-item px-2 mb-3 md:m-0">
-                                    <CustomLink className="nav-link active" aria-current="page" to={'/manageitems/additem'}>Add Item</CustomLink>
+                                    <CustomLink className="nav-link active" aria-current="page" to={'/additem'}>Add Item</CustomLink>
                                 </li>
                                 <li className="nav-item px-2 mb-3 md:m-0">
                                     <CustomLink className="nav-link active" aria-current="page" to={'/myitems'}>My Items</CustomLink>

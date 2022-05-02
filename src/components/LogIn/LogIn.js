@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CustomSpinner from '../CustomSpinner/CustomSpinner';
 
 const LogIn = () => {
     const [agree,setAgree]=useState(false)
@@ -25,6 +26,9 @@ const LogIn = () => {
     const location =useLocation()
     let from = location.state?.from?.pathname || "/";
     useEffect(()=>{
+        if(loading){
+            return <CustomSpinner/>
+        }
         if(loginError){
             setError(loginError.message)
             return;
