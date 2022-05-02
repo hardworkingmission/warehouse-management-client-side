@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faTrash,faEdit} from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import { confirm } from "react-confirm-box";
+import { useNavigate } from 'react-router-dom';
 
 const options = {
     labels: {
@@ -12,6 +13,7 @@ const options = {
   }
 
 const AllItems = () => {
+    const navigate=useNavigate()
     const [products,setProducts]=useState([])
     useEffect(()=>{
         axios.get('http://localhost:8000/products')
@@ -36,6 +38,9 @@ const AllItems = () => {
             })
          }
        
+    }
+    const editProduct=(id)=>{
+        navigate(`/inventory/${id}`)
     }
 
     return (
@@ -77,7 +82,8 @@ const AllItems = () => {
                                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-wrap">
                                     {product?.price}
                                     </td>
-                                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-wrap text-center">
+                                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-wrap justify-center flex items-center">
+                                    <button className=' bg-green-400 text-white px-2 py-1 rounded mr-1' onClick={()=>editProduct(product._id)}><FontAwesomeIcon icon={faEdit}/></button>
                                     <button className=' bg-red-600 text-white px-2 py-1 rounded ' onClick={()=>deleteProduct(product._id)}><FontAwesomeIcon icon={faTrash}/></button>
                                     </td>
                                 </tr>
