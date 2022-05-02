@@ -4,7 +4,7 @@ import useProducts from '../../hooks/useProducts/useProducts';
 
 const Chart = () => {
     const [products,setProducts]=useProducts()
-    const chartData=products.map(product=>({
+    const chartData=products?.map(product=>({
         name:product.name.split(' ')[0],
         quantity:product.quantity
     }))

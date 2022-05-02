@@ -5,6 +5,7 @@ import {verifyPassword} from '../../utilites/passwordVerification'
 
 import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth'
 import SocialLogin from '../SocialLogin/SocialLogin';
+import CustomSpinner from '../CustomSpinner/CustomSpinner';
 
 const SignUp = () => {
     const [state,setState]=useState({name:'',email:'',password:'',confirmPassword:''})
@@ -28,6 +29,9 @@ const SignUp = () => {
             }
 
     },[authError,user,navigate])
+    if(loading){
+        return <CustomSpinner/>
+    }
     
     const initialize={
         name:'',
@@ -63,10 +67,10 @@ const SignUp = () => {
                     <input type="email" name="email" id=""  className='border-b-2 mb-2 p-2 w-full outline-none bg-gray-100 rounded' onChange={handleChange} value={state.email} required/><br />
 
                     <label htmlFor="password" className='block'>Password</label>
-                    <input type="text" name='password' className='border-b-2 mb-2 p-2 w-full outline-none bg-gray-100 rounded' onChange={handleChange} value={state.password} required/><br />
+                    <input type="password" name='password' className='border-b-2 mb-2 p-2 w-full outline-none bg-gray-100 rounded' onChange={handleChange} value={state.password} required/><br />
 
                     <label htmlFor="confirmPassword" className='block'>Confirm Password</label>
-                    <input type="text" name='confirmPassword' className='border-b-2 mb-2 p-2 w-full outline-none bg-gray-100 rounded' onChange={handleChange} value={state.confirmPassword} required/><br />
+                    <input type="password" name='confirmPassword' className='border-b-2 mb-2 p-2 w-full outline-none bg-gray-100 rounded' onChange={handleChange} value={state.confirmPassword} required/><br />
 
                     <div className=''>
                         <div>

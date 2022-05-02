@@ -25,6 +25,7 @@ const LogIn = () => {
     const [error,setError]=useState('')
 
     //redirect
+    
     const location =useLocation()
     let from = location.state?.from?.pathname || "/";
     useEffect(()=>{
@@ -36,6 +37,9 @@ const LogIn = () => {
             navigate(from,{replace:true})       
         }
     },[loginError,user,navigate,from])
+    if(loading){
+        return <CustomSpinner/>
+    }
     const initialize={
         email:'',
         password:''

@@ -25,6 +25,8 @@ const MyItems = () => {
                 setMyItems(res.data)
             })
     },[email])
+
+    //delete an item
     const deleteItem=async(id)=>{
         console.log(id)
         const result = await confirm("Do you want to delete it?",options);
