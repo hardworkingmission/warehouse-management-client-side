@@ -48,6 +48,7 @@ const LogIn = () => {
     const handleChange=(e)=>{
         setState({...state,[e.target.name]:e.target.value})
     }
+    
     const {email,password}=state
     const userLogIn=async(e)=>{
         e.preventDefault()
@@ -57,8 +58,6 @@ const LogIn = () => {
                 localStorage.setItem('accessToken',res.data)
                 console.log(res.data)
             })
-
-
     }
     const handleResetPassword=async()=>{
         if(email){
@@ -88,7 +87,7 @@ const LogIn = () => {
                         <p className='underline text-blue-600 cursor-pointer' onClick={handleResetPassword}>I forget my password</p>
                     </div>
                     <p className='text-center my-2 text-red-600'>{error&&error}</p>
-                    <input type="submit" value="Log In" className='p-2 bg-gray-300 w-full rounded-lg font-bold cursor-pointer'/>
+                    <input type="submit" value="Log In" className='p-2 bg-gray-300 w-full rounded-lg font-bold cursor-pointer' disabled={agree?false:true}/>
                 </form>
                 <div className='md:flex my-1'>
                     <p>Have no account?</p>
