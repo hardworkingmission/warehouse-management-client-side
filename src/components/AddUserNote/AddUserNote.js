@@ -30,9 +30,9 @@ const AddUserNote = ({setModalIsOpen,setCreate}) => {
         <div className='w-5/6 mx-auto'>
             <form action="" onSubmit={createNote}>
                 <h3 className='text-center text-xl font-bold my-2'>Please note down</h3>
-                <textarea name="note" className='mb-2 border-b-2 p-2 outline-none bg-gray-100 w-full rounded' id="" cols="30" placeholder='Note' onChange={handleChange} value={state.note}/><br />
-                <input type="email" name="email" className='mb-2 border-b-2 p-2 outline-none bg-gray-100 w-full rounded' id="" placeholder='Email' onChange={handleChange} value={state.email}/><br />
-                <input type="date" name="date" className='mb-2 border-b-2 p-2 outline-none bg-gray-100 w-full rounded' id=""  onChange={handleChange} value={state.date}/><br />
+                <textarea name="note" className='mb-2 border-b-2 p-2 outline-none bg-gray-100 w-full rounded' id="" cols="30" placeholder='Note' onChange={handleChange} value={state.note} required/><br />
+                <input type="email" name="email" className='mb-2 border-b-2 p-2 outline-none bg-gray-100 w-full rounded' id="" placeholder='Email' onChange={handleChange} value={state.email} required readOnly/><br />
+                <input type="date" name="date" className='mb-2 border-b-2 p-2 outline-none bg-gray-100 w-full rounded' id=""  onChange={handleChange} value={state.date} required/><br />
                 <input type="submit" value="Add" className='bg-gray-300 w-full rounded py-1 font-bold cursor-pointer' />
             </form>
         </div>
