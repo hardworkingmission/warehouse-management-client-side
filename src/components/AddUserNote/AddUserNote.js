@@ -16,7 +16,7 @@ const AddUserNote = ({setModalIsOpen,setCreate}) => {
     }
     const createNote=(e)=>{
         e.preventDefault()
-        axios.post('http://localhost:8000/createnote',state)
+        axios.post('https://secure-eyrie-16583.herokuapp.com/createnote',state)
            .then((res)=>{
                setModalIsOpen(false)
                if(res.data){

@@ -24,7 +24,7 @@ const AddItem = () => {
             img:imgFile.name,
             ...state
         }
-        axios.post('http://localhost:8000/addProduct',newItem)
+        axios.post('https://secure-eyrie-16583.herokuapp.com/addProduct',newItem)
            .then((res)=>{
                if(res.data.insertedId){
                 navigate('/manageitems/allitems')

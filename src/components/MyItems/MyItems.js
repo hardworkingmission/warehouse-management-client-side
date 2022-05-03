@@ -21,7 +21,7 @@ const MyItems = () => {
     const navigate= useNavigate()
     const email=user?.email
     useEffect(()=>{
-        axios.get(`http://localhost:8000/myItems?email=${email}`,{
+        axios.get(`https://secure-eyrie-16583.herokuapp.com/myItems?email=${email}`,{
             headers:{
                 authorization:`Bearer ${localStorage.getItem('accessToken')}`
             }
@@ -44,7 +44,7 @@ const MyItems = () => {
         const result = await confirm("Do you want to delete it?",options);
         if(result){
            //setModalIsOpen(false)
-           axios.delete(`http://localhost:8000/deleteProduct/${id}`)
+           axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteProduct/${id}`)
            .then(res=>{
                if(res.data.deletedCount===1){
                    const restItems=myItems?.filter(myitem=>myitem._id!==id)

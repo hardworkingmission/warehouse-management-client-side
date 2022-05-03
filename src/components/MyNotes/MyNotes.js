@@ -22,7 +22,7 @@ const MyNotes = () => {
     const [myNotes,setMyNotes]=useState([])
     const email=user?.email
     useEffect(()=>{
-            axios.get(`http://localhost:8000/mynotes?email=${email}`,{
+            axios.get(`https://secure-eyrie-16583.herokuapp.com/mynotes?email=${email}`,{
                 headers:{
                     authorization:`Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -49,7 +49,7 @@ const MyNotes = () => {
         const result = await confirm("Do you want to delete it?",options);
         if(result){
            //setModalIsOpen(false)
-           axios.delete(`http://localhost:8000/deleteNote/${id}`)
+           axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteNote/${id}`)
            .then(res=>{
                if(res.data.deletedCount===1){
                    const restNotes=myNotes?.filter(mynote=>mynote._id!==id)

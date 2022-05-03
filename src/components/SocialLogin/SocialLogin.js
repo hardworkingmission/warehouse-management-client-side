@@ -19,7 +19,7 @@ const SocialLogin = () => {
         }
         if(googleUser){
             const email=googleUser.user.email
-            axios.post('http://localhost:8000/generateJWT',{email})
+            axios.post('https://secure-eyrie-16583.herokuapp.com/generateJWT',{email})
             .then((res)=>{
                 localStorage.setItem('accessToken',res.data)
                 console.log(res.data)
