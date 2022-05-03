@@ -13,6 +13,9 @@ const UsersNote = () => {
     const[notes,setNotes]=useState([])
     const [create,setCreate]=useState(false)
     const navigate=useNavigate()
+    const [pages,setPages]=useState(0)
+    const [page,setPage]=useState(0)
+    const [size,setSize]=useState(5)
     const [modalIsOpen,setModalIsOpen]=useState(false)
 
     const closeModal=()=>{
@@ -23,12 +26,22 @@ const UsersNote = () => {
         setCreate(false)
     }
     useEffect(()=>{
-        axios.get('http://localhost:8000/notes')
+        axios.get(`http://localhost:8000/notes?page=${page}&size=${size}`)
              .then((res)=>{
                  setNotes(res.data)
              })
 
-    },[create])
+    },[page,size])
+
+    useEffect(()=>{
+        axios.get('http://localhost:8000/noteCount')
+        .then(res=>{
+            const count=parseInt(res.data.noteCount)
+            setPages(Math.ceil(count/5))
+        })
+
+    },[])
+
 
     const handleNote=()=>{
         if(user?.email){
@@ -47,10 +60,10 @@ const UsersNote = () => {
             <div className='text-center'>
                 <button className='text-5xl font-bold text-gray-600' onClick={handleNote}>+</button>
             </div>
-            <div className='bg-gray-300 p-2'>
+            <div className='bg-gray-300 p-2 '>
                 {
                     notes?.map(note=>(
-                        <div key={note._id}>
+                        <div key={note._id} className='mb-2'>
                             <div className='p-2 bg-white rounded-lg'>
                                 <p>{note?.note}</p>
                             </div>
@@ -61,6 +74,20 @@ const UsersNote = () => {
                 }
                 
 
+            </div>
+            <div className='text-center my-3'>
+                {
+                    [...Array(pages).keys()].map(num=>(
+                        <button className={`border border-2 mr-2 py-1 px-2 ${num===page?'bg-gray-300':''}`} onClick={()=>setPage(num)}>{num+1}</button>
+                    ))
+
+                }
+                {
+                    <select name="" id="" className='border border-2 py-1' onClick={(e)=>setSize(e.target.value)}>
+                        <option selected value="5">5</option>
+                        <option  value="10">10</option>
+                    </select>
+                }
             </div>
             <ToastContainer/>
         </div>
