@@ -13,6 +13,8 @@ import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/LogIn/LogIn';
 import Blogs from './components/Blogs/Blogs';
 import MyItems from './components/MyItems/MyItems';
+import AddUserNote from './components/AddUserNote/AddUserNote';
+import MyNotes from './components/MyNotes/MyNotes'
 
 function App() {
   return (
@@ -40,9 +42,15 @@ function App() {
             <MyItems/>
           </RequireAuth> 
         }/>
+        <Route path='/mynotes' element={
+          <RequireAuth>
+            <MyNotes/>
+          </RequireAuth> 
+        }/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<LogIn/>}/>
         <Route path='/blogs' element={<Blogs/>}/>
+        <Route path='/addusernote' element={<AddUserNote/>}/>
         <Route path='/inventory/'>
           <Route path=':productId' element={
             <RequireAuth>

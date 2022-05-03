@@ -113,7 +113,7 @@ const AllItems = () => {
             <div className='text-center'>
                 {
                     [...Array(pages).keys()].map(num=>(
-                        <button className={`border border-2 mr-2 py-1 px-2 ${num===page?'bg-gray-300':''}`} onClick={()=>setPage(num)}>{num}</button>
+                        <button className={`border border-2 mr-2 py-1 px-2 ${num===page?'bg-gray-300':''}`} onClick={()=>setPage(num)}>{num+1}</button>
                     ))
 
                 }

@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import Chart from '../Chart/Chart';
 import CustomCarousel from '../CustomCarousel/CustomCarousel';
 import Products from '../Products/Products';
+import UsersNote from '../UsersNote/UsersNote';
 
 const Home = () => {
     return (
@@ -20,8 +21,7 @@ const Home = () => {
                 <Chart/>
             </div>
             <div className='my-3'>
-                <h1>Extre section incomplete</h1>
-
+                <UsersNote/>
             </div>
         </div>
     );
