@@ -12,7 +12,7 @@ const Inventory = () => {
     
     //get product by id
     useEffect(()=>{
-        axios.get(`http://localhost:8000/product/${productId}`)
+        axios.get(`https://secure-eyrie-16583.herokuapp.com/product/${productId}`)
               .then((res)=>{
                   console.log(res.data)
                   setProduct(res.data)
@@ -24,7 +24,7 @@ const Inventory = () => {
     const handleDelivery=()=>{
         product.quantity=parseInt(product.quantity)>0?parseInt(product.quantity)-1:parseInt(product.quantity)
         setProduct({...product})
-        axios.put(`http://localhost:8000/updateQuantity/${product._id}`,product)
+        axios.put(`https://secure-eyrie-16583.herokuapp.com/updateQuantity/${product._id}`,product)
              .then((res)=>{
                  if(res.data){
                      console.log(res.data)
@@ -37,7 +37,7 @@ const Inventory = () => {
         e.preventDefault()
         product.quantity=parseInt(product.quantity)+parseInt(reStock)
         setProduct({...product})
-        axios.put(`http://localhost:8000/updateQuantity/${product._id}`,product)
+        axios.put(`https://secure-eyrie-16583.herokuapp.com/updateQuantity/${product._id}`,product)
              .then((res)=>{
                  if(res.data){
                      setReStock(0)

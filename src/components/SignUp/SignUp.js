@@ -22,11 +22,14 @@ const SignUp = () => {
 
     useEffect(()=>{
         if(authError){
-            setErrors(authError)
+            const tem=[]
+            tem.push(authError.message)
+            setErrors(tem)
+            console.log(authError.message)
             return;
             }
             if(user){
-                navigate('/login')
+                navigate('/')
             }
 
     },[authError,user,navigate])

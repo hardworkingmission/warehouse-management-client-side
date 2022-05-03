@@ -53,7 +53,7 @@ const LogIn = () => {
     const userLogIn=async(e)=>{
         e.preventDefault()
         await signInWithEmailAndPassword(email,password)
-        axios.post('http://localhost:8000/generateJWT',{email})
+        axios.post('https://secure-eyrie-16583.herokuapp.com/generateJWT',{email})
             .then((res)=>{
                 localStorage.setItem('accessToken',res.data)
                 console.log(res.data)
