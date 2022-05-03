@@ -6,6 +6,8 @@ import { confirm } from "react-confirm-box";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import {Helmet} from "react-helmet";
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const options = {
     labels: {
@@ -16,16 +18,25 @@ const options = {
 const MyItems = () => {
     const [user,loading,error]=useAuthState(auth)
     const [myItems,setMyItems]=useState([])
+    const navigate= useNavigate()
     const email=user?.email
     useEffect(()=>{
-        axios.get(`https://secure-eyrie-16583.herokuapp.com/myItems?email=${email}`,{
+        axios.get(`http://localhost:8000/myItems?email=${email}`,{
             headers:{
                 authorization:`Bearer ${localStorage.getItem('accessToken')}`
             }
         }).then((res)=>{
                 setMyItems(res.data)
             })
-    },[email])
+           .catch(async(err)=>{
+            if(err.response.status===403||err.response.status===401)
+            {   await signOut(auth)
+                navigate('/login')
+            }
+            console.log('Error',err.response.status)
+
+        })
+    },[email,navigate])
 
     //delete an item
     const deleteItem=async(id)=>{
@@ -33,7 +44,7 @@ const MyItems = () => {
         const result = await confirm("Do you want to delete it?",options);
         if(result){
            //setModalIsOpen(false)
-           axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteProduct/${id}`)
+           axios.delete(`http://localhost:8000/deleteProduct/${id}`)
            .then(res=>{
                if(res.data.deletedCount===1){
                    const restItems=myItems?.filter(myitem=>myitem._id!==id)

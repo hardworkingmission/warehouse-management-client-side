@@ -26,7 +26,7 @@ const UsersNote = () => {
         setCreate(false)
     }
     useEffect(()=>{
-        axios.get(`https://secure-eyrie-16583.herokuapp.com/notes?page=${page}&size=${size}`)
+        axios.get(`http://localhost:8000/notes?page=${page}&size=${size}`)
              .then((res)=>{
                  setNotes(res.data)
              })
@@ -34,7 +34,7 @@ const UsersNote = () => {
     },[page,size])
 
     useEffect(()=>{
-        axios.get('https://secure-eyrie-16583.herokuapp.com/noteCount')
+        axios.get('http://localhost:8000/noteCount')
         .then(res=>{
             const count=parseInt(res.data.noteCount)
             setPages(Math.ceil(count/5))

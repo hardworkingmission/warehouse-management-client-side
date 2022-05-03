@@ -5,7 +5,7 @@ const useProducts = () => {
     const [products,setProducts]=useState([])
     const [loading,setLoading]=useState(true)
     useEffect(()=>{
-        axios.get('https://secure-eyrie-16583.herokuapp.com/products')
+        axios.get('http://localhost:8000/products')
            .then(res=>{
                setProducts(res.data)
                setLoading(false)

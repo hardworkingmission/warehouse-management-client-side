@@ -20,7 +20,7 @@ const AllItems = () => {
     const [page,setPage]=useState(0)
     const [size,setSize]=useState(10)
     useEffect(()=>{
-        axios.get(`https://secure-eyrie-16583.herokuapp.com/products?page=${page}&size=${size}`)
+        axios.get(`http://localhost:8000/products?page=${page}&size=${size}`)
              .then(res=>{
                 setProducts(res.data)
              })
@@ -28,7 +28,7 @@ const AllItems = () => {
 
     },[page,size])
     useEffect(()=>{
-        axios.get('https://secure-eyrie-16583.herokuapp.com/itemCount')
+        axios.get('http://localhost:8000/itemCount')
         .then(res=>{
             const count=parseInt(res.data.itemCount)
             setPages(Math.ceil(count/10))
@@ -40,7 +40,7 @@ const AllItems = () => {
         const result = await confirm("Do you want to delete it?",options);
          if(result){
             //setModalIsOpen(false)
-            axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteProduct/${id}`)
+            axios.delete(`http://localhost:8000/deleteProduct/${id}`)
             .then(res=>{
                 if(res.data.deletedCount===1){
                     const restProducts=products?.filter(product=>product._id!==id)

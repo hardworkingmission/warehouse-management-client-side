@@ -6,6 +6,9 @@ import { confirm } from "react-confirm-box";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import {Helmet} from "react-helmet";
+import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { async } from '@firebase/util';
 
 const options = {
     labels: {
@@ -14,18 +17,31 @@ const options = {
     },
   }
 const MyNotes = () => {
+    const navigate=useNavigate()
     const [user,loading,error]=useAuthState(auth)
     const [myNotes,setMyNotes]=useState([])
     const email=user?.email
     useEffect(()=>{
-        axios.get(`https://secure-eyrie-16583.herokuapp.com/mynotes?email=${email}`,{
-            headers:{
-                authorization:`Bearer ${localStorage.getItem('accessToken')}`
-            }
-        }).then((res)=>{
-            setMyNotes(res.data)
-            })
-    },[email])
+            axios.get(`http://localhost:8000/mynotes?email=${email}`,{
+                headers:{
+                    authorization:`Bearer ${localStorage.getItem('accessToken')}`
+                }
+            }).then((res)=>{
+                //console.log(res.response.status)
+                setMyNotes(res.data)
+                })
+                .catch(async(err)=>{
+                    if(err.response.status===403||err.response.status===401)
+                    {   await signOut(auth)
+                        navigate('/login')
+                    }
+                    console.log('Error',err.response.status)
+
+                })
+           
+        
+           
+    },[email,navigate])
 
     //delete an item
     const deleteItem=async(id)=>{
@@ -33,7 +49,7 @@ const MyNotes = () => {
         const result = await confirm("Do you want to delete it?",options);
         if(result){
            //setModalIsOpen(false)
-           axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteNote/${id}`)
+           axios.delete(`http://localhost:8000/deleteNote/${id}`)
            .then(res=>{
                if(res.data.deletedCount===1){
                    const restNotes=myNotes?.filter(mynote=>mynote._id!==id)
