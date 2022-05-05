@@ -8,7 +8,6 @@ import auth from '../../firebase.init';
 import {Helmet} from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { async } from '@firebase/util';
 
 const options = {
     labels: {

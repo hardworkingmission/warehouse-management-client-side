@@ -51,6 +51,7 @@ const UsersNote = () => {
         }
         
     }
+    console.log(notes)
     return (
         <div className="w-full mx-auto">
             <CustomModal closeModal={closeModal} modalIsOpen={modalIsOpen}>

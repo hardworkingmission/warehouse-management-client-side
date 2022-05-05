@@ -2,22 +2,18 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { confirm } from "react-confirm-box";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import {Helmet} from "react-helmet";
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import CustomConfirm from '../CustomConfirm/CustomConfirm';
 
-const options = {
-    labels: {
-      confirmable: "Confirm",
-      cancellable: "Cancel"
-    },
-  }
 const MyItems = () => {
     const [user,loading,error]=useAuthState(auth)
     const [myItems,setMyItems]=useState([])
+    
+
     const navigate= useNavigate()
     const email=user?.email
     useEffect(()=>{
@@ -38,30 +34,42 @@ const MyItems = () => {
         })
     },[email,navigate])
 
+    //handle custom confirm
+    const [modalIsOpen,setModalIsOpen]=useState(false)
+    const [itemId,setItemId]=useState('')
+    const closeModal=()=>{
+        console.log('close')
+        setModalIsOpen(false)
+    }
+
+    //handle confirm
+    const handleConfirm=(confirm)=>{
+        if(confirm){
+            setModalIsOpen(false)
+            axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteProduct/${itemId}`)
+            .then(res=>{
+                if(res.data.deletedCount===1){
+                    const restItems=myItems?.filter(myitem=>myitem._id!==itemId)
+                    setMyItems(restItems)
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+         }
+
+    }
+
     //delete an item
     const deleteItem=async(id)=>{
-        console.log(id)
-        const result = await confirm("Do you want to delete it?",options);
-        if(result){
-           //setModalIsOpen(false)
-           axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteProduct/${id}`)
-           .then(res=>{
-               if(res.data.deletedCount===1){
-                   const restItems=myItems?.filter(myitem=>myitem._id!==id)
-                   setMyItems(restItems)
-               }
-           }).catch((err)=>{
-               console.log(err)
-           })
-        }
-
-
+        setItemId(id)
+        setModalIsOpen(true)
     }
     return (
         <div className="w-5/6 mx-auto">
             <Helmet>
                 <title>MyItems</title>
             </Helmet>
+            <CustomConfirm modalIsOpen={modalIsOpen} closeModal={closeModal} handleConfirm={handleConfirm} />
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="overflow-hidden">

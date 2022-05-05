@@ -2,20 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash,faEdit} from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
-import { confirm } from "react-confirm-box";
+import CustomConfirm from '../CustomConfirm/CustomConfirm';
+import CustomSpinner from '../CustomSpinner/CustomSpinner'
 import { useNavigate } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
-const options = {
-    labels: {
-      confirmable: "Confirm",
-      cancellable: "Cancel"
-    },
-  }
+
 
 const AllItems = () => {
     const navigate=useNavigate()
-    const [products,setProducts]=useState([])
+    const [products,setProducts]=useState(null)
     const [pages,setPages]=useState(0)
     const [page,setPage]=useState(0)
     const [size,setSize]=useState(10)
@@ -36,31 +32,44 @@ const AllItems = () => {
 
     },[])
 
-    const deleteProduct=async(id)=>{
-        const result = await confirm("Do you want to delete it?",options);
-         if(result){
-            //setModalIsOpen(false)
-            axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteProduct/${id}`)
+    //custom confirm
+    const [modalIsOpen,setModalIsOpen]=useState(false)
+    const [productId,setProductId]=useState('')
+    const closeModal=()=>{
+        console.log('close')
+        setModalIsOpen(false)
+    }
+    const handleConfirm=(confirm)=>{
+
+        //setModalIsOpen(false)
+        if(confirm){
+            setModalIsOpen(false)
+            axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteProduct/${productId}`)
             .then(res=>{
                 if(res.data.deletedCount===1){
-                    const restProducts=products?.filter(product=>product._id!==id)
+                    const restProducts=products?.filter(product=>product._id!==productId)
                     setProducts(restProducts)
                 }
             }).catch((err)=>{
                 console.log(err)
             })
          }
-       
+    }
+
+    const deleteProduct=(id)=>{
+        setProductId(id)
+        setModalIsOpen(true)
     }
     const editProduct=(id)=>{
         navigate(`/inventory/${id}`)
     }
-
+    //console.log(productId)
     return (
         <div className="w-full">
             <Helmet>
                 <title>AllItems</title>
             </Helmet>
+            <CustomConfirm modalIsOpen={modalIsOpen} closeModal={closeModal} handleConfirm={handleConfirm} />
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="overflow-hidden">
@@ -86,7 +95,7 @@ const AllItems = () => {
                             </thead>
                             <tbody>
                                 {
-                                    products?.map(product=>(
+                                    !products?<CustomSpinner/>:products?.map(product=>(
                                     <tr key={product._id} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                     <td className="px-6 py-4 whitespace-wrap text-sm font-medium text-gray-900"><img src={process.env.PUBLIC_URL+`/images/${product?.img}`} alt="" className='h-[50px] w-[50px]' /></td>
                                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-wrap">
