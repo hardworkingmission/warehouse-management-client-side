@@ -60,7 +60,7 @@ const MyItems = () => {
     }
 
     //delete an item
-    const deleteItem=async(id)=>{
+    const deleteItem=(id)=>{
         setItemId(id)
         setModalIsOpen(true)
     }

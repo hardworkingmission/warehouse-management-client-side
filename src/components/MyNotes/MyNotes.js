@@ -8,6 +8,7 @@ import auth from '../../firebase.init';
 import {Helmet} from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
+import CustomConfirm from '../CustomConfirm/CustomConfirm';
 
 const options = {
     labels: {
@@ -41,31 +42,40 @@ const MyNotes = () => {
         
            
     },[email,navigate])
+    //custom confirm
+    const [modalIsOpen,setModalIsOpen]=useState(false)
+    const [noteId,setNoteId]=useState('')
+    const closeModal=()=>{
+        console.log('close')
+        setModalIsOpen(false)
+    }
+    const handleConfirm=(confirm)=>{
+        if(confirm){
+            setModalIsOpen(false)
+            axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteNote/${noteId}`)
+            .then(res=>{
+                if(res.data.deletedCount===1){
+                    const restNotes=myNotes?.filter(myNote=>myNote._id!==noteId)
+                    setMyNotes(restNotes)
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+         }
+
+    }
 
     //delete an item
-    const deleteItem=async(id)=>{
-        console.log(id)
-        const result = await confirm("Do you want to delete it?",options);
-        if(result){
-           //setModalIsOpen(false)
-           axios.delete(`https://secure-eyrie-16583.herokuapp.com/deleteNote/${id}`)
-           .then(res=>{
-               if(res.data.deletedCount===1){
-                   const restNotes=myNotes?.filter(mynote=>mynote._id!==id)
-                   setMyNotes(restNotes)
-               }
-           }).catch((err)=>{
-               console.log(err)
-           })
-        }
-
-
+    const deleteItem=(id)=>{
+        setNoteId(id)
+        setModalIsOpen(true)
     }
     return (
         <div className="w-5/6 mx-auto">
             <Helmet>
                 <title>MyNotes</title>
             </Helmet>
+            <CustomConfirm modalIsOpen={modalIsOpen} closeModal={closeModal} handleConfirm={handleConfirm} />
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div className="overflow-hidden">
